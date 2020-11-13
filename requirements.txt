@@ -1,5 +1,5 @@
 altair
 pandas
 streamlit
-phuzzy
+phuzzy>=0.7.2
 matplotlib
