@@ -1,4 +1,6 @@
+plotly
 altair
+numpy
 pandas
 streamlit
 phuzzy>=0.7.3
