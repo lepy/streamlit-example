@@ -60,6 +60,6 @@ fig.add_vrect(x0=bs.min(), x1=bs.max(), y0=0, y1=maxFs, row="all", col=1,
               annotation_text="valid", annotation_position="bottom right",
               fillcolor="green", opacity=0.25, line_width=0)
 
-st.write(r"$F_{Seil} = F_g \frac{\tan(\alpha)}{\cos{\beta}}$")
+st.write(r"$F_{Seil} = F_g \frac{\tan{\alpha}}{\cos{\beta}}$")
 # Plot!
 st.plotly_chart(fig, use_container_width=True)
