@@ -6,3 +6,4 @@ phuzzy>=0.7.3
 matplotlib
 streamlit_ace>=0.0.4
 sdata>=0.7
+openpyxl

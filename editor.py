@@ -6,7 +6,7 @@ import sdata
 
 st.markdown("# sdata example")
 
-@st.cache(persist=True, allow_output_mutation=True)
+@st.cache(persist=False, allow_output_mutation=True)
 def get_sdata(name):
     return sdata.Data(name="data", uuid="38b26864e7794f5182d38459bab85842")
 
@@ -39,7 +39,7 @@ sample_content_table = """name	value
 1	1.2
 2	2.3"""
 
-@st.cache(persist=True, allow_output_mutation=True)
+@st.cache(persist=False, allow_output_mutation=True)
 def get_content(component):
     print("get_content {}".format(component))
     if component=="metadata":
@@ -76,12 +76,12 @@ if sdatapart == 'Metadata':
         cells.append(line.split(";"))
     try:
         df = pd.DataFrame(cells, columns=['name', 'value', 'dtype', 'unit', 'description'])
-        st.write("parsed data")
-        st.dataframe(df)
+        # st.write("parsed data")
+        # st.dataframe(df)
         data.metadata._attributes= {}
         for i, row in df.iterrows():
-            print(row)
-            print(row["name"], row.value, str(row.dtype), row.unit, row.description)
+            # print(row)
+            # print(row["name"], row.value, str(row.dtype), row.unit, row.description)
             data.metadata.add(row["name"], value=row["value"], dtype=str(row["dtype"]), unit=row["unit"], description=row["description"])
 
     except Exception as exp:
@@ -125,35 +125,39 @@ else:
 st.sidebar.markdown("## sdata.Data Status")
 st.sidebar.dataframe(data.describe())
 
-st.markdown("## sdata.Data json")
-content_json = st_ace(key="json", height=100, placeholder=sample_content_table, value=data.to_json(), readonly=True,
-                      language="json", wrap=True)
+ex = st.button("export data")
+if ex:
 
 
-#data2 = data.from_json(data.to_json())
-st.markdown("## example python code")
-content_python= r"""# python example
-import sdata
-json_str = r'''{}'''
-data = sdata.Data.from_json(json_str)
-print(data.describe())
-print(data.metadata.df)
-print(data.df)
-print(data.comment)
-""".format(data.to_json())
-content_json = st_ace(key="python", height=100, placeholder=sample_content_table, value=content_python, readonly=True,
-                      language="python", wrap=True)
+    st.markdown("## sdata.Data json")
+    content_json = st_ace(key="json", height=100, placeholder=sample_content_table, value=data.to_json(), readonly=True,
+                          language="json", wrap=True)
+
+
+    #data2 = data.from_json(data.to_json())
+    st.markdown("## example python code")
+    content_python= r"""# python example
+    import sdata
+    json_str = r'''{}'''
+    data = sdata.Data.from_json(json_str)
+    print(data.describe())
+    print(data.metadata.df)
+    print(data.df)
+    print(data.comment)
+    """.format(data.to_json())
+    content_json = st_ace(key="python", height=100, placeholder=sample_content_table, value=content_python, readonly=True,
+                          language="python", wrap=True)
 
 
 
-# Display editor's content as you type
+    # Display editor's content as you type
 
-# cells = []
-# for line in content.splitlines():
-#     cells.append(line.split("\t"))
-# df = pd.DataFrame(cells[1:], columns=cells[0])
-#
-# st.dataframe(df)
-#
-# st.write(content)
-# # for lin in lines
+    # cells = []
+    # for line in content.splitlines():
+    #     cells.append(line.split("\t"))
+    # df = pd.DataFrame(cells[1:], columns=cells[0])
+    #
+    # st.dataframe(df)
+    #
+    # st.write(content)
+    # # for lin in lines
