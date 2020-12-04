@@ -142,6 +142,7 @@ print(data.comment)
 """.format(data.to_json())
     content_json = st_ace(key="python", height=200, value=content_python, readonly=True,
                           language="python", wrap=True)
+    st.balloons()
 
 st.sidebar.markdown("""* [SCALE](https://www.scale.eu/de/dienst/fem-methoden)
 * [sdata.git](https://github.com/lepy/sdata)
