@@ -13,7 +13,7 @@ st.sidebar.markdown("## sdata")
 def get_sdata(name):
     df = pd.DataFrame({"a": [1.1, 2.1, 3.5],
                        "b": [2.4, 1.2, 2.2]})
-    d = sdata.Data(name="data", uuid="38b26864e7794f5182d38459bab85842", table=df)
+    d = sdata.Data(name=name, uuid="38b26864e7794f5182d38459bab85842", table=df)
     d.metadata.add("Temp", value=25.4, dtype="float", unit="degC", description="Temperatur")
     d.comment = """# header
 ## subheader
@@ -36,7 +36,7 @@ $f(x) = \\frac{1}{2}\\sin(x)$
 # tab_size=4, wrap=False, show_gutter=True, show_print_margin=False,
 # readonly=False, annotations=None, markers=None, auto_update=True, key=None)
 
-data = get_sdata("data")
+data = get_sdata("my_first_sdata")
 content_metadata = data.metadata.to_csv(sep=";", header=None)
 
 gen_uuid = st.sidebar.button("gen uuid")
